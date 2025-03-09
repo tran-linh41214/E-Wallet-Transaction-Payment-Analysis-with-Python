@@ -1,18 +1,9 @@
-# data_wrangling_project
-# UNIGAP - PORTFOLIO BUILDING MODULE - SQL/ PYTHON PROJECT
-
-🔥Use this template as an outline for your SQL/ Python Github projects - which is task by task type of projects. 
-Make a copy of this readme file and tailor it your own. Happy portfolio-ing and start applying aggressively :"))
+# E-Wallet Transaction & Payment Analysis
 
 ---
-![KPMG Transaction Analysis](https://github.com/Dorothy-Ho-Vy/Sample_SQL_Python_template/blob/4dee6ff56077b90b1aea82e8517136f7185a77a3/Blue%20White%20Modern%20Payment%20Gateway%20Service%20Twitter%20Post.png.crdownload)
-
-👉🏻Change Icon emoji 🔥🔍📘🚩 to your likings by clicking "Start" + "."
-
-# 📊 Project Title: [Your Project Name]  
-Author: [Your Name]  
-Date: YYYY-MM-DD  
-Tools Used: SQL/ Python  
+# 📊 Project Title: [E-Wallet Transaction & Payment Analysis]  
+Author: [Linh Tran]  
+Tools Used: Python  
 
 ---
 
@@ -28,29 +19,26 @@ Tools Used: SQL/ Python
 ### Objective:
 ### 📖 What is this project about? What Business Question will it solve?
 
-Clearly outline what this project does, what business questions the project will solve. 
+This project analyzes transaction and payment data from an e-wallet company to:
 
-- Provide a brief introduction - Write in bullet point format
-- Point out the main business question
+✔️ Understand payment and transaction trends within the platform.  
+✔️ Identify data quality issues (missing values, duplicates, incorrect data types).  
+✔️ Analyze transaction types to uncover insights about user behavior.  
+✔️ Determine the top-performing and lowest-performing products and teams.  
+✔️ Investigate anomalies in product ownership and transactions.  
+✔️ Find the primary contributors to refund transactions.  
 
-
- _Example:_
-  This project uses Python to analyze transaction data from KPMG to:
-
-✔️ Identify the behavior in customer's first transaction.  
-✔️ Provide actionable insights to increase retention rate   
+**The main business question:**
+✔️ How can we optimize payment and transaction processes to enhance business performance? 
  
 
 
 ### 👤 Who is this project for?  
 
-Mention who might benefit from this project 
-
- _Example:_
-
-✔️ Data analysts & business analysts  
-✔️ Decision-makers & stakeholders  
-
+✔️ **Data Analysts & Business Analysts** – to derive insights and improve reporting accuracy.  
+✔️ **Product Managers** – to understand product performance and user engagement.  
+✔️ **Finance & Operations Teams** – to track financial trends and identify revenue opportunities.  
+✔️ **Decision-makers & Stakeholders** – to guide strategic decisions based on transaction patterns.  
 
 
 ---
@@ -58,36 +46,53 @@ Mention who might benefit from this project
 ## 📂 Dataset Description & Data Structure  
 
 ### 📌 Data Source  
-- Source: (Mention where the dataset is obtained from—Kaggle, company database, government sources, etc.)  
-- Size: (Mention the number of rows & columns)  
-- Format: (.csv, .sql, .xlsx, etc.)  
+- Source: Company database   
+- Format: .csv  
 
 ### 📊 Data Structure & Relationships  
 
 #### 1️⃣ Tables Used:  
-Mention how many tables are in the dataset.  
+
+3 tables:
+- payment_report.csv (monthly payment volume of products)
+- product.csv (product information)
+- transactions.csv (transactions information)
+
 
 #### 2️⃣ Table Schema & Data Snapshot  
 
-Table 1: Products Table  
-
-👉🏻 Insert a screenshot of table schema 
-
-📌If the table is too big, only capture a part of it that contains key metrics you used in the projects or put the table in toggle
-
- _Example:_
-
-| Column Name | Data Type | Description |  
-|-------------|----------|-------------|  
-| Product_ID  | INT      | Unique identifier for each product |  
-| Name        | TEXT     | Product name |  
-| Category    | TEXT     | Product category |  
-| Price       | FLOAT    | Price per unit |  
+Table 1: payment_report  
+  
+| Column Name    | Data Type | Description                           |  
+|---------------|----------|---------------------------------------|  
+| report_month  | object     | Transaction reporting month           |  
+| payment_group | object     | Payment group                         |  
+| product_id    | INT      | Unique identifier for the product     |  
+| source_id     | INT      | Source ID of the transaction          |  
+| volume        | INT      | Total transaction value               |  
 
 
-Table 2: Sales Transactions  
+Table 2: product  
 
-👉🏻 Insert a screenshot of table schema.
+| Column Name  | Data Type | Description                          |  
+|-------------|----------|--------------------------------------|  
+| product_id  | INT      | Unique identifier for each product  |  
+| category    | TEXT     | Product category                     |  
+| team_own    | TEXT     | Team that owns the product           |  
+
+ 
+Table 3: Transactions
+| Column Name  | Data Type | Description                          |  
+|-------------|----------|--------------------------------------| 
+| transaction_id | int | Unique identifier for each transaction |
+| merchant_id   |  int  | Unique identifier for the merchant involved |
+| volume      | int |  Transaction amount | 
+| transType   | int  | Type of transaction | 
+| transStatus  | int  | Status of the transaction |
+| sender_id  | float | Unique identifier of the sender |
+| receiver_id | float | 	Unique identifier of the receiver |
+| extra_info  | object |  Additional transaction details |
+| timeStamp | int  | Timestamp when the transaction was recorded |  
 
 
 ---
@@ -95,6 +100,25 @@ Table 2: Sales Transactions
 ## ⚒️ Main Process
 
 1️⃣ Data Cleaning & Preprocessing  
+
+```python
+import pandas as pd
+import numpy as np
+```
+
+```python
+from google.colab import drive
+drive.mount('/content/drive')
+```
+
+Import dataframes
+
+```python
+payment_report = pd.read_csv('/content/drive/My Drive/DAC_Python_Project 2/payment_report.csv')
+product = pd.read_csv('/content/drive/My Drive/DAC_Python_Project 2/product.csv')
+transactions = pd.read_csv('/content/drive/My Drive/DAC_Python_Project 2/transactions.csv')
+```
+
 2️⃣ Exploratory Data Analysis (EDA)  
 
 Merge payment_report và product
@@ -174,18 +198,127 @@ print(top_3_product_ids)
 ```
 ![image](https://github.com/user-attachments/assets/138c6f3c-6f5d-42f9-b0d8-182d23a8f994)
 
-Product_id của Top 3 sản phẩm có hiệu suất lớn nhất: 1976, 429, 372
+Product IDs of the top 3 highest-performing products: 1976, 429, 372
 
+**2**. **Given that 1 product_id is only owed by 1 team, are there any abnormal products against this rule?**
 
- 
+```python
+# Kiểm tra sản phẩm thuộc nhiều hơn 1 team
+team_check = payment_enriched.groupby('product_id')['team_own'].nunique()
+abnormal_products = team_check[team_check > 1]
+print(abnormal_products)
+ ```
+
+→ No product belongs to more than one team.
+
+**3. Find the team has had the lowest performance (lowest volume) since Q2.2023. Find the category that contributes the least to that team.**
+
+```python
+# Lọc các dữ liệu từ Q2.2023 trở đi
+payment_enriched['report_month'] = pd.to_datetime(payment_enriched['report_month'], format='%Y-%m')
+q2_2023 = payment_enriched[payment_enriched['report_month'] >= '2023-04']
+
+# Team có hiệu suất thấp nhất
+team_lowest_performance = q2_2023.groupby('team_own')['volume'].sum().nsmallest(1)
+print(team_lowest_performance)
+
+# Tìm category đóng góp ít nhất trong team đó
+lowest_team = team_lowest_performance.idxmin()
+lowest_team_category = q2_2023[q2_2023['team_own'] == lowest_team].groupby('category')['volume'].sum().nsmallest(1)
+print(lowest_team_category)
+```
+
+![image](https://github.com/user-attachments/assets/b41ed502-1c95-4c86-954e-ac48da0fd995)
+
+- Lowest-performing team: APS (total volume: 51,141,753)
+- Least contributing category: PXXXXXE (total volume: 25,232,438)
+
+**4. Find the contribution of source_ids of refund transactions (payment_group = ‘refund’), what is the source_id with the highest contribution?**
+
+```python
+# Tìm source_id có đóng góp cao nhất cho giao dịch 'refund'
+refunds = payment_enriched[payment_enriched['payment_group'] == 'refund']
+top_refund_source = refunds.groupby('source_id')['volume'].sum().idxmax()
+print(top_refund_source)
+```
+
+Source_ID with the highest number of refunds: 38  
+**5. Define type of transactions (‘transaction_type’) for each row**
+
+```python
+# Thiết lập hàm để xác định các loại giao dịch
+def classify_transaction(row):
+    if row['transType'] == 2 and row['merchant_id'] == 1205:
+        return 'Bank Transfer Transaction'
+    elif row['transType'] == 2 and row['merchant_id'] == 2260:
+        return 'Withdraw Money Transaction'
+    elif row['transType'] == 2 and row['merchant_id'] == 2270:
+        return 'Top Up Money Transaction'
+    elif row['transType'] == 2:
+        return 'Payment Transaction'
+    elif row['transType'] == 8 and row['merchant_id'] == 2250:
+        return 'Transfer Money Transaction'
+    elif row['transType'] == 8:
+        return 'Split Bill Transaction'
+    else:
+        return 'Invalid Transaction'
+
+# Áp dụng hàm để thêm cột 'transaction_type'
+transactions['transaction_type'] = transactions.apply(classify_transaction, axis=1)
+
+# Kiểm tra kết quả
+transactions[['transType', 'merchant_id', 'transaction_type']].head()
+```
+
+![image](https://github.com/user-attachments/assets/ac3156e9-287a-4de7-b71f-2c509090321d)
+
+**6. Of each transaction type (excluding invalid transactions): find the number of transactions, volume, senders and receivers.**
+
+```python
+summary_stats = transactions.groupby('transaction_type').agg(
+    number_of_transactions=('transaction_type', 'count'),
+    total_volume=('volume', 'sum'),
+    unique_senders=('sender_id', 'nunique'),
+    unique_receivers=('receiver_id', 'nunique')
+).reset_index()
+
+# Kiểm tra kết quả
+print(summary_stats)
+```
+![image](https://github.com/user-attachments/assets/7b3ab292-e8bc-4e16-8026-5aeada4c5d60)
 
 ---
 
 ## 🔎 Final Conclusion & Recommendations  
+  
 
-👉🏻 Based on the insights and findings above, we would recommend the [stakeholder team] to consider the following:  
+#### **Final Conclusion:**  
 
-📌 Key Takeaways:  
-✔️ Recommendation 1  
-✔️ Recommendation 2  
-✔️ Recommendation 3
+✔️ The **top 3 highest-performing products** are **Product IDs: 1976, 429, and 372**. These products have the highest transaction volumes, indicating strong user demand.  
+✔️ There is **no product that belongs to multiple teams**, meaning product ownership follows the expected structure.  
+✔️ The **lowest-performing team** is **APS**, with a total transaction volume of **51,141,753**. This indicates a potential need for strategy adjustments to improve performance.  
+✔️ The **least contributing product category** is **PXXXXXE**, with a volume of **25,232,438**, suggesting that products in this category may not be meeting customer needs or facing market challenges.  
+✔️ The **most refunded source_id** is **38**, which may indicate an issue with this payment source, such as frequent transaction failures or customer dissatisfaction.  
+
+---
+
+#### **Recommendations:**  
+🔹 **For high-performing products (1976, 429, 372):**  
+- Investigate the success factors of these products and apply similar strategies to other products.  
+- Increase marketing efforts to further boost their adoption and retention rates.  
+
+🔹 **For Team APS:**  
+- Conduct a deeper analysis of why this team has the lowest performance.  
+- Consider providing additional support, such as better resources, training, or promotional activities.  
+- Review the product offerings managed by APS to identify areas for improvement.  
+
+🔹 **For Category PXXXXXE:**  
+- Assess the demand for this category and explore whether product modifications, rebranding, or better positioning could improve its performance.  
+- Conduct customer surveys to understand why this category has lower traction.  
+
+🔹 **For Refund Issues (Source ID 38):**  
+- Investigate the reasons for frequent refunds from this source.  
+- Check for potential technical issues, fraudulent activities, or customer complaints.  
+- Implement corrective actions, such as improving fraud detection, enhancing transaction security, or optimizing the refund process.  
+
+
