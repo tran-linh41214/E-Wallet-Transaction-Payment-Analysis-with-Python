@@ -1,8 +1,8 @@
-# E-Wallet Transaction & Payment Analysis
+# E-Wallet Transaction & Payment Analysis | Python
 
 ---
-# 📊 Project Title: [E-Wallet Transaction & Payment Analysis]  
-Author: [Linh Tran]  
+# 📊 Project Title: E-Wallet Transaction & Payment Analysis | Python 
+Author: Linh Tran  
 Tools Used: Python  
 
 ---
