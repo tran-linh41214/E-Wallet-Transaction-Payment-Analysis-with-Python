@@ -10,7 +10,8 @@ Tools Used: Python
 ## 📑 Table of Contents  
 1. [📌 Background & Overview](#-background--overview)  
 2. [📂 Dataset Description & Data Structure](#-dataset-description--data-structure)  
-3. [🔎 Final Conclusion & Recommendations](#-final-conclusion--recommendations)
+3.  [⚒️ Main Process](#-main-process)
+4. [🔎 Final Conclusion & Recommendations](#-final-conclusion--recommendations)
 
 ---
 
@@ -28,8 +29,8 @@ This project analyzes transaction and payment data from an e-wallet company to:
 ✔️ Investigate anomalies in product ownership and transactions.  
 ✔️ Find the primary contributors to refund transactions.  
 
-**The main business question:**
-✔️ How can we optimize payment and transaction processes to enhance business performance? 
+**The main business question:**  
+❓ How can we optimize payment and transaction processes to enhance business performance? 
  
 
 
@@ -61,8 +62,12 @@ This project analyzes transaction and payment data from an e-wallet company to:
 
 #### 2️⃣ Table Schema & Data Snapshot  
 
-Table 1: payment_report  
-  
+<details>
+  <summary>📌 This project used 3 tables:</summary>
+
+  <details>
+  <summary>Table 1: payment_report</summary>
+
 | Column Name    | Data Type | Description                           |  
 |---------------|----------|---------------------------------------|  
 | report_month  | object     | Transaction reporting month           |  
@@ -71,17 +76,22 @@ Table 1: payment_report
 | source_id     | INT      | Source ID of the transaction          |  
 | volume        | INT      | Total transaction value               |  
 
+  </details>
 
-Table 2: product  
+  <details>
+  <summary>Table 2: Product</summary>  
 
 | Column Name  | Data Type | Description                          |  
 |-------------|----------|--------------------------------------|  
 | product_id  | INT      | Unique identifier for each product  |  
 | category    | TEXT     | Product category                     |  
-| team_own    | TEXT     | Team that owns the product           |  
+| team_own    | TEXT     | Team that owns the product           | 
 
- 
-Table 3: Transactions
+</details>
+
+ <details>
+  <summary>Table 3: Transactions</summary>  
+
 | Column Name  | Data Type | Description                          |  
 |-------------|----------|--------------------------------------| 
 | transaction_id | int | Unique identifier for each transaction |
@@ -93,6 +103,10 @@ Table 3: Transactions
 | receiver_id | float | 	Unique identifier of the receiver |
 | extra_info  | object |  Additional transaction details |
 | timeStamp | int  | Timestamp when the transaction was recorded |  
+
+</details>
+</details> 
+
 
 
 ---
