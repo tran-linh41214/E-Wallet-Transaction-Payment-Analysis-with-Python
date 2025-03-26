@@ -18,8 +18,9 @@ Tools Used: Python
 ## 📌 Background & Overview  
 
 ### Objective:
-### 📖 What is this project about? What Business Question will it solve?
-
+### 📖 What Business Question will it solve? What is this project about?  
+**The main business question:**    
+❓ How can we optimize payment and transaction processes to enhance business performance?   
 This project analyzes transaction and payment data from an e-wallet company to:
 
 ✔️ Understand payment and transaction trends within the platform.  
@@ -28,9 +29,6 @@ This project analyzes transaction and payment data from an e-wallet company to:
 ✔️ Determine the top-performing and lowest-performing products and teams.  
 ✔️ Investigate anomalies in product ownership and transactions.  
 ✔️ Find the primary contributors to refund transactions.  
-
-**The main business question:**  
-❓ How can we optimize payment and transaction processes to enhance business performance? 
  
 
 
